@@ -13,7 +13,8 @@ local plugins = {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
-        "rust-analyzer"
+        "rust-analyzer",
+        "clangd",
       }
     }
   },
@@ -38,8 +39,20 @@ local plugins = {
     },
     config = function (_, opts)
       require("rust-tools").setup(opts)
-    end 
-  }
+    end
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
+    cmd = { "Copilot" },
+    opts = {
+      suggestion = {
+        enabled = true,
+        auto_trigger = false,
+      },
+      panel = { enabled = false },
+    }
+  },
 }
 
 return plugins

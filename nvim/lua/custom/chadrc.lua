@@ -2,7 +2,7 @@
 local M = {}
 
 M.ui = {
-  theme = 'gruvbox',
+  theme = 'everblush',
   nvdash = { load_on_startup = true }
 }
 M.plugins = 'custom.plugins'
