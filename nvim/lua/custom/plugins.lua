@@ -14,6 +14,9 @@ local plugins = {
 	},
 	{
 		"neovim/nvim-lspconfig",
+		dependencies = {
+			{ "williamboman/mason-lspconfig.nvim" },
+		},
 		config = function()
 			require "plugins.configs.lspconfig"
 			require "custom.configs.lspconfig"
@@ -30,31 +33,21 @@ local plugins = {
 		end,
 	},
 	{
-		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = {
+			{ "williamboman/mason.nvim" },
+		},
 		opts = {
-			ensure_installed = {
-				"rust-analyzer",
-				"clangd",
-			}
+			ensure_installed = require("custom.configs.lspconfig").ensure_installed
 		}
+
 	},
 	{
 		"simrat39/rust-tools.nvim",
 		ft = "rust",
-		opts = {
-			server = {
-				filetypes = { "rust" },
-				settings = {
-					["rust-analyzer"] = {
-						-- enable clippy on save
-						checkOnSave = {
-							command = "clippy",
-							allTargets = false,
-						},
-					},
-				},
-			}
-		},
+		opts = function()
+			return require("custom.configs.rust_tools")
+		end,
 		-- dependencies = "neovim/nvim-lspconfig",
 		config = function(_, opts)
 			opts.server.on_attach = require("plugins.configs.lspconfig").on_attach
@@ -85,7 +78,18 @@ local plugins = {
 	{
 		"cacharle/c_formatter_42.vim",
 		cmd = "CFormatter42",
-	}
+	},
+	{
+		"Pocco81/auto-save.nvim",
+		event = "TextChanged",
+		opts = {
+			enable = false,
+			execution_message = {
+				message = "",
+			},
+			debounce_delay = 2000,
+		}
+	},
 }
 
 return plugins

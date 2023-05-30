@@ -11,6 +11,12 @@ M.abc = {
 		["<leader>q"] = { "<cmd>q!<CR>", "close current window" },
 		["<leader>w"] = { "<cmd>w!<CR>", "save current window" },
 		["<leader>e"] = { "<cmd>NvimTreeToggle <CR>", "focus nvimtree" },
+		["<leader>m"] = {
+			function()
+				require("custom.utils").open_man()
+			end,
+			"Open the manpage of the function under the cursor"
+		},
 	},
 
 	i = {
@@ -91,4 +97,26 @@ M.telescope = {
 	},
 }
 
+M.nvterm = {
+	plugin = true,
+
+	t = {
+		-- toggle in terminal mode
+		["<C-t>"] = {
+			function()
+				require("nvterm.terminal").toggle "float"
+			end,
+			"toggle floating term",
+		},
+	},
+	n = {
+		-- toggle in terminal mode
+		["<C-t>"] = {
+			function()
+				require("nvterm.terminal").toggle "float"
+			end,
+			"toggle floating term",
+		},
+	}
+}
 return M

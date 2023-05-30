@@ -5,6 +5,7 @@ local opts = {
 		"html",
 		"javascript",
 		"json",
+		"dockerfile",
 		"lua",
 		"luadoc",
 		"luap",
@@ -28,6 +29,8 @@ local opts = {
 		"css",
 		"scss",
 		"tsx",
+		"go",
+		"sql",
 	}
 }
 
